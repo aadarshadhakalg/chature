@@ -21,10 +21,15 @@
  * @copyright  2022 aadar <@link aadarshadhakal.com.np>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 class local_chature_observer
 {
+
     public  static function process_discussion(\mod_forum\event\assessable_uploaded $event){
-        alert("Alert");
+        global $DB;
+        $DB->delete_records('feedback_template', array('id' => $event->objectid));
     }
 
 }
