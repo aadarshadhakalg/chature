@@ -26,10 +26,9 @@ defined('MOODLE_INTERNAL') || die();
 
 class local_chature_observer
 {
-
     public  static function process_discussion(\mod_forum\event\assessable_uploaded $event){
         global $DB;
-        $DB->delete_records('feedback_template', array('id' => $event->objectid));
+        $DB->delete_records('forum_discussions', array('id' => $event->objectid));
     }
 
 }

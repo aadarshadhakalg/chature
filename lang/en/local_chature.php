@@ -15,17 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Chature AI Plugin.
+ * local_chature file description here.
  *
  * @package    local_chature
  * @copyright  2022 Aadarsha Dhakal <@link https://aadarshadhakal.com.np>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-
-
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2022052100;       // The current module version (Date: YYYYMMDDXX).
-$plugin->requires  = 2022041300;    // Requires this Moodle version.
-$plugin->component = 'local_chature';        // Full name of the plugin (used for diagnostics)
