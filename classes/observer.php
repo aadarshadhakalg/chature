@@ -37,6 +37,7 @@ class local_chature_observer
         $acctoken = get_config("local_chature","accesstoken");
         $glueendpoint = get_config("local_chature","glueendpoint");
         $curl = curl_init();
+        $postid = $post->id;
 
         curl_setopt_array($curl, [
             CURLOPT_URL => "$glueendpoint/moodleglue/process/",
@@ -46,7 +47,7 @@ class local_chature_observer
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS =>  "{\n\t\"post_id\":$post,\n\t\"token\":\"$acctoken\",\n\t\"course\":$course\n}",
+            CURLOPT_POSTFIELDS =>  "{\n\t\"post_id\":$postid,\n\t\"token\":\"$acctoken\",\n\t\"course\":$course\n}",
             CURLOPT_HTTPHEADER => [
                 "Authorization: Token $exttoken",
                 "Content-Type: application/json"
