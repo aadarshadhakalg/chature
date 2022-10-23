@@ -29,40 +29,43 @@ class local_chature_observer
     public  static function process_discussion(\mod_forum\event\assessable_uploaded $event){
         global $DB;
         $post = forum_get_post_full($event->objectid);
+        $postid = $post->id;
         $forum = $DB->get_record('forum', array('id' => $post->forum), '*', MUST_EXIST);
         $discussion = $DB->get_record('forum_discussions',
             array('id' => $post->discussion), '*', MUST_EXIST);
-        $course = $discussion->course;
-        $exttoken = get_config("local_chature","apikey");
-        $acctoken = get_config("local_chature","accesstoken");
-        $glueendpoint = get_config("local_chature","glueendpoint");
-        $curl = curl_init();
-        $postid = $post->id;
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "$glueendpoint/moodleglue/process/",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS =>  "{\n\t\"post_id\":$postid,\n\t\"token\":\"$acctoken\",\n\t\"course\":$course\n}",
-            CURLOPT_HTTPHEADER => [
-                "Authorization: Token $exttoken",
-                "Content-Type: application/json"
-            ],
-        ]);
+        if($discussion->firstpost == $postid) {
+            $course = $discussion->course;
+            $exttoken = get_config("local_chature", "apikey");
+            $acctoken = get_config("local_chature", "accesstoken");
+            $glueendpoint = get_config("local_chature", "glueendpoint");
+            $curl = curl_init();
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+            curl_setopt_array($curl, [
+                CURLOPT_URL => "$glueendpoint/moodleglue/process/",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => "{\n\t\"post_id\":$postid,\n\t\"token\":\"$acctoken\",\n\t\"course\":$course\n}",
+                CURLOPT_HTTPHEADER => [
+                    "Authorization: Token $exttoken",
+                    "Content-Type: application/json"
+                ],
+            ]);
 
-        curl_close($curl);
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
 
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            echo $response;
+            curl_close($curl);
+
+            if ($err) {
+                echo "cURL Error #:" . $err;
+            } else {
+                echo $response;
+            }
         }
 
     }
