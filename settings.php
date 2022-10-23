@@ -18,12 +18,32 @@
  * local_chature file description here.
  *
  * @package    local_chature
- * @copyright  2022 Aadarsha Dhakal <@link https://aadarshadhakal.com.np>
+ * @copyright  2022 Aadarsha Dhakal <@link aadarshadhakal.com.np>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// Ensure the configurations for this site are set
+if ( $hassiteconfig ){
+    $settings = new admin_settingpage( 'local_chature', 'Chature AI' );
 
-$string['setting_external_token_name'] = 'External API: Key';
-$string['setting_external_token_des'] = 'This is the key used to access the External API';
-$string['setting_access_token_name'] = 'Access Token: Webservices';
-$string['setting_access_token_des'] = 'This is the key used to access the moodle webservices';
+
+    $ADMIN->add( 'Chature AI', $settings );
+    $settings->add( new admin_setting_configtext(
+
+        'local_chature/apikey',
+        get_string('setting_external_token_name','local_chature'),
+        get_string('setting_external_token_des','local_chature'),
+        'No Key Defined',
+        PARAM_TEXT
+    ) );
+
+    $settings->add( new admin_setting_configtext(
+        'local_chature/accesstoken',
+        get_string('setting_access_token_name','local_chature'),
+        get_string('setting_access_token_des','local_chature'),
+        'No Key Defined',
+        PARAM_TEXT
+
+    ) );
+
+}
