@@ -27,3 +27,5 @@ $string['setting_external_token_name'] = 'External API: Key';
 $string['setting_external_token_des'] = 'This is the key used to access the External API';
 $string['setting_access_token_name'] = 'Access Token: Webservices';
 $string['setting_access_token_des'] = 'This is the key used to access the moodle webservices';
+$string['setting_glueendpoint_name'] = 'Glue Endpoint';
+$string['setting_glueendpoint_des'] = 'Glue Endpoint URL';

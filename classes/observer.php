@@ -35,11 +35,11 @@ class local_chature_observer
         $course = $discussion->course;
         $exttoken = get_config("local_chature","apikey");
         $acctoken = get_config("local_chature","accesstoken");
+        $glueendpoint = get_config("local_chature","glueendpoint");
         $curl = curl_init();
 
         curl_setopt_array($curl, [
-            CURLOPT_PORT => "8000",
-            CURLOPT_URL => "http://localhost:8000/moodleglue/process/",
+            CURLOPT_URL => "$glueendpoint/moodleglue/process/",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

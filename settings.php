@@ -29,7 +29,6 @@ if ( $hassiteconfig ){
 
     $ADMIN->add( 'Chature AI', $settings );
     $settings->add( new admin_setting_configtext(
-
         'local_chature/apikey',
         get_string('setting_external_token_name','local_chature'),
         get_string('setting_external_token_des','local_chature'),
@@ -41,6 +40,15 @@ if ( $hassiteconfig ){
         'local_chature/accesstoken',
         get_string('setting_access_token_name','local_chature'),
         get_string('setting_access_token_des','local_chature'),
+        'No Key Defined',
+        PARAM_TEXT
+
+    ) );
+
+    $settings->add( new admin_setting_configtext(
+        'local_chature/glueendpoint',
+        get_string('setting_glueendpoint_name','local_chature'),
+        get_string('setting_glueendpoint_des','local_chature'),
         'No Key Defined',
         PARAM_TEXT
 
