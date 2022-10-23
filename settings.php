@@ -27,7 +27,7 @@ if ( $hassiteconfig ){
     $settings = new admin_settingpage( 'local_chature', 'Chature AI' );
 
 
-    $ADMIN->add( 'Chature AI', $settings );
+    $ADMIN->add( 'localplugins', $settings );
     $settings->add( new admin_setting_configtext(
         'local_chature/apikey',
         get_string('setting_external_token_name','local_chature'),
